@@ -13,5 +13,5 @@ test-c16/
 */.ipynb_checkpoints/*
 */__pycache__/*
 __pycache__
-*.ipynb
+# *.ipynb
 abmil.py
