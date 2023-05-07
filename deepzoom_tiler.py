@@ -198,8 +198,9 @@ class DeepZoomStaticTiler(object):
 
 def nested_patches(img_slide, out_base, level=(0,), ext='jpeg'):
     print('\n Organizing patches')
+    print(img_slide)
     img_name = img_slide.split(os.sep)[-1].split('.')[0]
-    img_class = img_slide.split(os.sep)[2]
+    img_class = img_slide.split(os.sep)[7]
     n_levels = len(glob.glob('WSI_temp_files/*'))
     bag_path = os.path.join(out_base, img_class, img_name)
     os.makedirs(bag_path, exist_ok=True)
@@ -256,11 +257,11 @@ if __name__ == '__main__':
     args = parser.parse_args()
     levels = tuple(args.magnifications)
     assert len(levels)<=2, 'Only 1 or 2 magnifications are supported!'
-    path_base = os.path.join('WSI', args.dataset)
+    path_base = os.path.join('/home/sci/Disk2/tcga_brca/WSI', args.dataset)
     if len(levels) == 2:
-        out_base = os.path.join('WSI', args.dataset, 'pyramid')
+        out_base = os.path.join('/home/sci/Disk2/tcga_brca/WSI', args.dataset, 'pyramid')
     else:
-        out_base = os.path.join('WSI', args.dataset, 'single')
+        out_base = os.path.join('/home/sci/Disk2/tcga_brca/WSI', args.dataset, 'single')
     all_slides = glob.glob(os.path.join(path_base, '*/*.'+args.slide_format)) +  glob.glob(os.path.join(path_base, '*/*/*.'+args.slide_format))
     
     # pos-i_pos-j -> x, y

@@ -5,15 +5,28 @@ import os, glob
 import pandas as pd
 import argparse
 
+# def generate_csv(args):
+#     if args.level=='high' and args.multiscale==1:
+#         path_temp = os.path.join('..', 'WSI', args.dataset, 'pyramid', '*', '*', '*', '*.jpeg')
+#         patch_path = glob.glob(path_temp) # /class_name/bag_name/5x_name/*.jpeg
+#     if args.level=='low' and args.multiscale==1:
+#         path_temp = os.path.join('..', 'WSI', args.dataset, 'pyramid', '*', '*', '*.jpeg')
+#         patch_path = glob.glob(path_temp) # /class_name/bag_name/*.jpeg
+#     if args.multiscale==0:
+#         path_temp = os.path.join('..', 'WSI', args.dataset, 'single', '*', '*', '*.jpeg')
+#         patch_path = glob.glob(path_temp) # /class_name/bag_name/*.jpeg
+#     df = pd.DataFrame(patch_path)
+#     df.to_csv('all_patches.csv', index=False)
+
 def generate_csv(args):
     if args.level=='high' and args.multiscale==1:
-        path_temp = os.path.join('..', 'WSI', args.dataset, 'pyramid', '*', '*', '*', '*.jpeg')
+        path_temp = os.path.join('/home/sci/Disk2/tcga_brca', 'WSI', args.dataset, 'pyramid', '*', '*', '*', '*.jpeg')
         patch_path = glob.glob(path_temp) # /class_name/bag_name/5x_name/*.jpeg
     if args.level=='low' and args.multiscale==1:
-        path_temp = os.path.join('..', 'WSI', args.dataset, 'pyramid', '*', '*', '*.jpeg')
+        path_temp = os.path.join('/home/sci/Disk2/tcga_brca', 'WSI', args.dataset, 'pyramid', '*', '*', '*.jpeg')
         patch_path = glob.glob(path_temp) # /class_name/bag_name/*.jpeg
     if args.multiscale==0:
-        path_temp = os.path.join('..', 'WSI', args.dataset, 'single', '*', '*', '*.jpeg')
+        path_temp = os.path.join('/home/sci/Disk2/tcga_brca', 'WSI', args.dataset, 'single', '*', '*', '*.jpeg')
         patch_path = glob.glob(path_temp) # /class_name/bag_name/*.jpeg
     df = pd.DataFrame(patch_path)
     df.to_csv('all_patches.csv', index=False)
@@ -27,7 +40,7 @@ def main():
     args = parser.parse_args()
     config = yaml.load(open("config.yaml", "r"), Loader=yaml.FullLoader)
     gpu_ids = eval(config['gpu_ids'])
-    os.environ['CUDA_VISIBLE_DEVICES']=','.join(str(x) for x in gpu_ids)   
+    # os.environ['CUDA_VISIBLE_DEVICES']=','.join(str(x) for x in gpu_ids)  
     dataset = DataSetWrapper(config['batch_size'], **config['dataset'])   
     generate_csv(args)
     simclr = SimCLR(dataset, config)

@@ -3,14 +3,16 @@ import sys
 import shutil
 from tqdm import tqdm
 
-svs_path = r'/home/sci/Disk2/tcga_brca/WSI'
+# svs_path = r'/home/sci/Disk2/tcga_brca/WSI'
+svs_path = r'/home/sci/Disk2/tcga_brca/WSI/tcga_brca/pyramid/sci'
+patch_path = r'/home/sci/Disk2/tcga_brca/WSI/tcga_brca/single/sci'
 slide_list = tqdm(os.listdir(svs_path))
 # print(slide_list)
-if not os.path.exists(os.path.join(svs_path,'tcga_brca','normal')):
-    normal_path = os.path.join(svs_path, 'tcga_brca','normal')
+if not os.path.exists(os.path.join(svs_path,'tcga_brca','0')):
+    normal_path = os.path.join(svs_path, 'tcga_brca','0')
     os.makedirs(normal_path)
-if not os.path.exists(os.path.join(svs_path,'tcga_brca','tumor')):
-    tumor_path = os.path.join(svs_path, 'tcga_brca','tumor')
+if not os.path.exists(os.path.join(svs_path,'tcga_brca','1')):
+    tumor_path = os.path.join(svs_path, 'tcga_brca','1')
     os.makedirs(tumor_path)
 
 
