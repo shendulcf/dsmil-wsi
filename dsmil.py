@@ -41,7 +41,8 @@ class BClassifier(nn.Module):
         else:
             self.v = nn.Identity()
         
-        ### 1D convolutional layer that can handle multiple class (including binary)
+        ### 1D convolutional layer that can handle multiple class (including binary) 
+        ### 用于将注意力加权的特征表示聚合成一个包级别的预测结果
         self.fcc = nn.Conv1d(output_class, output_class, kernel_size=input_size)  
         
     def forward(self, feats, c): # N x K, N x C
@@ -56,7 +57,8 @@ class BClassifier(nn.Module):
         A = torch.mm(Q, q_max.transpose(0, 1)) # compute inner product of Q to each entry of q_max, A in shape N x C, each column contains unnormalized attention scores
         A = F.softmax( A / torch.sqrt(torch.tensor(Q.shape[1], dtype=torch.float32, device=device)), 0) # normalize attention scores, A in shape N x C, 
         B = torch.mm(A.transpose(0, 1), V) # compute bag representation, B in shape C x V
-                
+        
+        # B 被重塑成形状为 1 x C x V 的张量，然后通过一维卷积层 self.fcc 进行卷积操作。最后，将结果重塑成形状为 1 x C x 1 的张量，并将其视为包级别的预测结果 C
         B = B.view(1, B.shape[0], B.shape[1]) # 1 x C x V
         C = self.fcc(B) # 1 x C x 1
         C = C.view(1, -1)
