@@ -200,7 +200,7 @@ def nested_patches(img_slide, out_base, level=(0,), ext='jpeg'):
     print('\n Organizing patches')
     print(img_slide)
     img_name = img_slide.split(os.sep)[-1].split('.')[0]
-    img_class = img_slide.split(os.sep)[7]
+    img_class = img_slide.split(os.sep)[7] ########## warning ##########
     n_levels = len(glob.glob('WSI_temp_files/*'))
     bag_path = os.path.join(out_base, img_class, img_name)
     os.makedirs(bag_path, exist_ok=True)
@@ -257,7 +257,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     levels = tuple(sorted(args.magnifications))
     assert len(levels)<=2, 'Only 1 or 2 magnifications are supported!'
-    path_base = os.path.join('/home/sci/Disk2/tcga_brca/WSI', args.dataset)
+    path_base = os.path.join('/home/sci/Disk2/tcga_brca/WSI', args.dataset) ########## warning need modify ##########
     if len(levels) == 2:
         out_base = os.path.join('/home/sci/Disk2/tcga_brca/WSI', args.dataset, 'pyramid')
     else:
