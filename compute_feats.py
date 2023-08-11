@@ -234,9 +234,9 @@ def main():
             print('Use pretrained features.')
     
     if args.magnification == 'tree' or args.magnification == 'low' or args.magnification == 'high' :
-        bags_path = os.path.join('WSI', args.dataset, 'pyramid', '*', '*')
+        bags_path = os.path.join('/home/sci/Disk2/tcga_brca/WSI', args.dataset, 'pyramid', '*', '*')
     else:
-        bags_path = os.path.join('WSI', args.dataset, 'single', '*', '*')
+        bags_path = os.path.join('/home/sci/Disk2/tcga_brca/WSI', args.dataset, 'single', '*', '*')
     feats_path = os.path.join('datasets', args.dataset)
         
     os.makedirs(feats_path, exist_ok=True)
@@ -255,6 +255,8 @@ def main():
         bag_df['label'] = i
         bag_df.to_csv(os.path.join('datasets', args.dataset, item.split(os.path.sep)[2]+'.csv'), index=False)
         all_df.append(bag_df)
+        print(all_df)
+    print(n_classes)
     bags_path = pd.concat(all_df, axis=0, ignore_index=True)
     bags_path = shuffle(bags_path)
     bags_path.to_csv(os.path.join('datasets', args.dataset, args.dataset+'.csv'), index=False)
