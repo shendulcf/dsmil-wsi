@@ -81,7 +81,7 @@ def compute_feats(args, bags_list, i_classifier, save_path=None, magnification='
             os.makedirs(os.path.join(save_path, bags_list[i].split(os.path.sep)[-2]), exist_ok=True)
             df.to_csv(os.path.join(save_path, bags_list[i].split(os.path.sep)[-2], bags_list[i].split(os.path.sep)[-1]+'.csv'), index=False, float_format='%.4f')
         
-def compute_tree_feats(args, bags_list, embedder_low, embedder_high, save_path=None):
+def  compute_tree_feats(args, bags_list, embedder_low, embedder_high, save_path=None):
     embedder_low.eval()
     embedder_high.eval()
     num_bags = len(bags_list)
@@ -234,9 +234,9 @@ def main():
             print('Use pretrained features.')
     
     if args.magnification == 'tree' or args.magnification == 'low' or args.magnification == 'high' :
-        bags_path = os.path.join('/home/sci/Disk2/tcga_brca/WSI', args.dataset, 'pyramid', '*', '*')
+        bags_path = os.path.join('/home/sci/Disk_data/Datasets/TCGA-NSCLC-sub/WSI', args.dataset, 'pyramid', '*', '*')
     else:
-        bags_path = os.path.join('/home/sci/Disk2/tcga_brca/WSI', args.dataset, 'single', '*', '*')
+        bags_path = os.path.join('/home/sci/Disk_data/Datasets/TCGA-NSCLC-sub/WSI', args.dataset, 'single', '*', '*')
     feats_path = os.path.join('datasets', args.dataset)
         
     os.makedirs(feats_path, exist_ok=True)

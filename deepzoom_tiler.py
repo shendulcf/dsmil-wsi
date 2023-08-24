@@ -257,11 +257,11 @@ if __name__ == '__main__':
     args = parser.parse_args()
     levels = tuple(sorted(args.magnifications))
     assert len(levels)<=2, 'Only 1 or 2 magnifications are supported!'
-    path_base = os.path.join('/home/sci/Disk2/tcga_brca/WSI', args.dataset) ########## warning need modify ##########
+    path_base = os.path.join('/home/sci/Disk_data/Datasets/TCGA-NSCLC-sub/WSI', args.dataset) ########## warning need modify ##########
     if len(levels) == 2:
-        out_base = os.path.join('/home/sci/Disk2/tcga_brca/WSI', args.dataset, 'pyramid')
+        out_base = os.path.join('/home/sci/Disk_data/Datasets/TCGA-NSCLC-sub/WSI', args.dataset, 'pyramid')
     else:
-        out_base = os.path.join('/home/sci/Disk2/tcga_brca/WSI', args.dataset, 'single')
+        out_base = os.path.join('/home/sci/Disk_data/Datasets/TCGA-NSCLC-sub/WSI', args.dataset, 'single')
     all_slides = glob.glob(os.path.join(path_base, '*/*.'+args.slide_format)) +  glob.glob(os.path.join(path_base, '*/*/*.'+args.slide_format))
     
     # pos-i_pos-j -> x, y

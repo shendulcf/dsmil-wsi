@@ -20,13 +20,13 @@ import argparse
 
 def generate_csv(args):
     if args.level=='high' and args.multiscale==1:
-        path_temp = os.path.join('/home/sci/Disk2/tcga_brca', 'WSI', args.dataset, 'pyramid', '*', '*', '*', '*.jpeg')
+        path_temp = os.path.join('/home/sci/Disk_data/Datasets/TCGA-NSCLC-sub', 'WSI', args.dataset, 'pyramid', '*', '*', '*', '*.jpeg')
         patch_path = glob.glob(path_temp) # /class_name/bag_name/5x_name/*.jpeg
     if args.level=='low' and args.multiscale==1:
-        path_temp = os.path.join('/home/sci/Disk2/tcga_brca', 'WSI', args.dataset, 'pyramid', '*', '*', '*.jpeg')
+        path_temp = os.path.join('/home/sci/Disk_data/Datasets/TCGA-NSCLC-sub', 'WSI', args.dataset, 'pyramid', '*', '*', '*.jpeg')
         patch_path = glob.glob(path_temp) # /class_name/bag_name/*.jpeg
     if args.multiscale==0:
-        path_temp = os.path.join('/home/sci/Disk2/tcga_brca', 'WSI', args.dataset, 'single', '*', '*', '*.jpeg')
+        path_temp = os.path.join('/home/sci/Disk_data/Datasets/TCGA-NSCLC-sub', 'WSI', args.dataset, 'single', '*', '*', '*.jpeg')
         patch_path = glob.glob(path_temp) # /class_name/bag_name/*.jpeg
     df = pd.DataFrame(patch_path)
     df.to_csv('all_patches.csv', index=False)
